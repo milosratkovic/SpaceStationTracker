@@ -1,3 +1,15 @@
+html {
+    display: table;
+    margin: auto;
+    background-color: #8E8E8E;
+}
+
+body {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+
 #issMap {
     height: 450px;
     width: 1200px;
