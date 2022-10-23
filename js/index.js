@@ -15,8 +15,7 @@
 
         const marker = L.marker([0,0], {icon: issIcon}).addTo(mymap);
 
-          const attribution =
-                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+      const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
         const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
         const tiles = L.tileLayer(tileUrl,{attribution});
         tiles.addTo(mymap);
