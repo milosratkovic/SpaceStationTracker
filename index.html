@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V4J40SVPX2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-V4J40SVPX2');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="description" content="Live International Space Station (ISS) tracking. Provides the position, speed, altitude, 
+         and visibility of the International Space Station.">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords"
+        content="ISS, International Space Station, space station location, notification, interactive, live view, camera feed, current location, real-time, astronomy, satellite, map">
+    <title>Space Station Tracker</title>
+</head>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+    integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
+<link href="css/StyleSheet.css" rel="stylesheet">
+<script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+    integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+
+<body>
+    <h1>International Space Station Tracker</h1>
+    <p>
+        <b>Latitude:</b> <span id="lat">loading Latitude...</span><br />
+        <b>Longitude:</b> <span id="lon">loading Longitude...</span><br />
+        <b>Speed:</b> <span id="speed">loading speed... </span><br />
+        <b>Altitude:</b> <span id="alt">loading altitude... </span><br />
+        <b>Visibility:</b> <span id="vis">loading altitude... </span><br />
+        <b>ISS Time Zone: </b> <span id="time">loading time...</span><br />
+        <br>
+        Don't Follow<label class="switch">
+            <input id="toggleFollow" type="checkbox" checked>
+            <span class="slider round"></span>
+        </label> Follow
+    <div id="issMap"></div>
+    <h1>Live Video Feed</h1>
+    <iframe width="1200" height="675" src="https://video.ibm.com/embed/17074538?autoplay=1&mute=1&enablejsapi=1"
+        scrolling="no" allowfullscreen webkitallowfullscreen frameborder="0"
+        style="border: 0 none transparent;"></iframe>
+    </p>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
