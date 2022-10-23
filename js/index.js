@@ -35,7 +35,7 @@
         const speed = data.velocity;
         const altitude = data.altitude;
         const visibility = data.visibility;
-        const time_api_url= time_api_url_base + longitude+","+latitude;
+        const time_api_url= time_api_url_base +latitude+","+longitude;
         const Timeresponse = await fetch(time_api_url);
         const TimeData = await Timeresponse.json();
         const localTime = TimeData.timezone_id;
