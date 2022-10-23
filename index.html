@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Station Tracker</title>
+</head>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+    integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
+<link href="StyleSheet.css" rel="stylesheet">
+
+
+    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+    integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+    
+
+<body>
+    <h1>International Space Station Tracker</h1>
+    <p>
+        <b>Latitude:</b> <span id="lat">loading Latitude...</span><br /> 
+        <b>Longitude:</b> <span id="lon">loading Longitude...</span><br />
+        <b>Speed:</b> <span id="speed">loading speed... </span><br />
+        <b>Altitude:</b> <span id="alt">loading altitude... </span><br />
+        <b>Visibility:</b> <span id="vis">loading altitude... </span><br />
+        <br> 
+         Don't Follow<label class="switch">
+            <input id="toggleFollow" type="checkbox" checked>
+            <span class="slider round"></span>
+            
+        </label> Follow
+        <div id = "issMap"></div> 
+
+        
+
+    </p>
+    <script>
+        // Making a map and tiles 
+         
+        const mymap = L.map('issMap').setView([0, 0], 3);
+
+        var issIcon = L.icon({
+                iconUrl: 'iss_icon.png',
+    
+                iconSize: [50, 32], // size of the icon
+                iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+                shadowAnchor: [25, 16],  // the same for the shadow
+      
+            });
+
+
+        const marker = L.marker([0,0], {icon: issIcon}).addTo(mymap);
+
+          const attribution =
+                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+        const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+        const tiles = L.tileLayer(tileUrl,{attribution});
+        tiles.addTo(mymap);
+        const api_url = 'https://api.wheretheiss.at/v1/satellites/25544';
+        
+        
+
+
+  
+
+    async function getISS(){ 
+        const response = await fetch(api_url);
+        const data = await response.json();
+        const longitude = data.longitude; 
+        const latitude = data.latitude;
+        const speed = data.velocity;
+        const altitude = data.altitude;
+        const visibility = data.visibility;
+
+        document.getElementById('lat').textContent = latitude.toFixed(4) + "°";
+        document.getElementById('lon').textContent = longitude.toFixed(4) + "°";
+        document.getElementById('speed').textContent = speed.toFixed(2) + " km/hr";
+        document.getElementById('alt').textContent = altitude.toFixed(2) + " km";
+        document.getElementById('vis').textContent = visibility;
+
+
+       
+        marker.setLatLng([latitude,longitude]);
+        
+        if (document.getElementById('toggleFollow').checked) {
+          mymap.setView([latitude, longitude], 8);  
+        } 
+        
+        
+    }
+
+    setInterval(getISS, 2000);
+
+
+    </script>
+
+
+</body>
+</html>
